@@ -224,7 +224,7 @@ class EPD:
         epdconfig.delay_ms(100)
         self.wait_until_idle()
 
-    def Clear(self, color):
+    def Clear(self):
         self.send_command(DATA_START_TRANSMISSION_1)
         epdconfig.digital_write(self.dc_pin, GPIO.HIGH)
         data = [0x33]
