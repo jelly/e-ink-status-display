@@ -121,11 +121,9 @@ class EPD:
         epdconfig.spi_writebyte([data])
 
     def wait_until_idle(self):
-        print("e-Paper busy")
         while(epdconfig.digital_read(self.busy_pin) == 0):      # 0: idle, 1: busy
-            epdconfig.delay_ms(100)    
-        print("e-Paper busy release")
-        
+            epdconfig.delay_ms(100)
+
     def init(self):
         if (epdconfig.module_init() != 0):
             return -1
