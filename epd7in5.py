@@ -232,8 +232,6 @@ class EPD:
         for _ in range(0, self.width // 4 * self.height):
             for _ in range(0, 4):
                 epdconfig.SPI.writebytes(data)
-                #self.send_data(0x33)
-                #epdconfig.SPI.writebytes([0x33])
         self.send_command(DISPLAY_REFRESH)
         self.wait_until_idle()
 
