@@ -14,7 +14,7 @@ This depends on a newer spi-dev then is available in Debian, to compile and run 
 * git clone https://github.com/doceme/py-spidev.git
 * cd py-spidev
 * make PYTHON=python3
-* PYTHONPATH=/home/pi/py-spidev/lib/ python3 fontrender.py
+* PYTHONPATH=/home/pi/py-spidev/lib/ python3 bench.py
 
 # Case
 
