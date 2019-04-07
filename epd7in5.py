@@ -223,15 +223,14 @@ class EPD:
         self.send_command(DISPLAY_REFRESH)
         epdconfig.delay_ms(100)
         self.wait_until_idle()
-        
+
     def Clear(self, color):
         self.send_command(DATA_START_TRANSMISSION_1)
         epdconfig.digital_write(self.dc_pin, GPIO.HIGH)
-        writebytes = epdconfig.SPI.writebytes([0x33])
         data = [0x33]
-        
-        for i in range(0, self.width // 4 * self.height):
-            for j in range(0, 4):
+
+        for _ in range(0, self.width // 4 * self.height):
+            for _ in range(0, 4):
                 epdconfig.SPI.writebytes(data)
                 #self.send_data(0x33)
                 #epdconfig.SPI.writebytes([0x33])
@@ -243,5 +242,3 @@ class EPD:
         self.wait_until_idle()
         self.send_command(DEEP_SLEEP)
         self.send_data(0XA5)
-### END OF FILE ###
-
