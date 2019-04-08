@@ -66,7 +66,7 @@ def module_init():
     GPIO.setup(DC_PIN, GPIO.OUT)
     GPIO.setup(CS_PIN, GPIO.OUT)
     GPIO.setup(BUSY_PIN, GPIO.IN)
-    SPI.max_speed_hz = 2000000
+    SPI.max_speed_hz = 12000000
     SPI.mode = 0b00
     return 0
 
