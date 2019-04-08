@@ -168,7 +168,6 @@ class EPD:
         image_monocolor = image.convert('1')
         imwidth, imheight = image_monocolor.size
         pixels = image_monocolor.load()
-        print("imwidth = ", imwidth, "imheight = ", imheight)
         if(imwidth == self.width and imheight == self.height):
             for y in range(imheight):
                 for x in range(imwidth):
