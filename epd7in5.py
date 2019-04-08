@@ -196,6 +196,8 @@ class EPD:
 
     def display(self, image):
         self.send_command(DATA_START_TRANSMISSION_1)
+        epdconfig.digital_write(self.dc_pin, GPIO.HIGH)
+        data = []
         for i in range(0, self.width // 4 * self.height):
             temp1 = image[i]
             j = 0
@@ -216,8 +218,9 @@ class EPD:
                 else:
                     temp2 |= 0x04
                 temp1 = (temp1 << 2) & 0xFF
-                self.send_data(temp2)
+                data.append(temp2)
                 j += 1
+        epdconfig.SPI.writebytes2(data)
         self.send_command(DISPLAY_REFRESH)
         epdconfig.delay_ms(100)
         self.wait_until_idle()
