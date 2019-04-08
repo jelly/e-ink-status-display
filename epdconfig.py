@@ -6,7 +6,7 @@
 # *----------------
 # * |	This version:   V2.0
 # * | Date        :   2018-11-01
-# * | Info        :   
+# * | Info        :
 # * 1.Remove:
 #   digital_write(self, pin, value)
 #   digital_read(self, pin)
@@ -68,6 +68,6 @@ def module_init():
     GPIO.setup(BUSY_PIN, GPIO.IN)
     SPI.max_speed_hz = 2000000
     SPI.mode = 0b00
-    return 0;
+    return 0
 
 ### END OF FILE ###
