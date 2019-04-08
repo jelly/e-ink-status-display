@@ -7,6 +7,7 @@ import feedparser
 
 import epd7in5
 from defs import (BUIENRADAR_ICONS, WIND_SCALE)
+from wordclock import time_str
 
 import time
 
@@ -51,7 +52,9 @@ draw.text((0, i), wind, font=weather_font, fill=0)
 draw.text((35, i), "\uf052", font=weather_font, fill=0)
 draw.text((70, i+4), sunrise, font=font, fill=0)
 
-draw.text((330, i), datetime.now().strftime('%a %d %b, %H:%M'), font=font_big, fill=0)
+now = datetime.now()
+timestr = time_str(now.hour, now.minute)
+draw.text((280, i), timestr, font=font_big, fill=0)
 
 i += 40
 
