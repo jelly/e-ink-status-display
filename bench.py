@@ -17,5 +17,5 @@ print("Clear...")
 epd.Clear()
 
 epd.display(buf)
-epd.sleep()
 print(time.ctime())
+epd.sleep()
