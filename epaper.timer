@@ -4,3 +4,6 @@ Description=epaper display timer
 [Timer]
 OnBootSec=2min
 OnCalendar=*:0/5
+
+[Install]
+WantedBy=default.target
