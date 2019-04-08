@@ -93,9 +93,9 @@ for index, day in enumerate(days):
 
 
 i += 10
-draw.text((0, i), "News", font=font)
+draw.text((0, i), "Nieuws", font=font)
 i += 10
-draw.text((0, i), "-------", font=font)
+draw.text((0, i), "--------", font=font)
 i += 30
 news_data = feedparser.parse(NEWS_FEED)
 for index, entry in enumerate(news_data['items']):
