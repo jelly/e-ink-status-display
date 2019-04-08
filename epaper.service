@@ -1,0 +1,7 @@
+[Unit]
+Description=Prints the date every minute
+
+[Service]
+WorkingDirectory=/home/pi/e-ink-status-display
+Environment="PYTHONPATH=/home/pi/py-spidev"
+ExecStart=/usr/bin/python3 /home/pi/fontrender.py
