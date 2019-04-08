@@ -221,10 +221,7 @@ class EPD:
     def Clear(self):
         self.send_command(DATA_START_TRANSMISSION_1)
         epdconfig.digital_write(self.dc_pin, GPIO.HIGH)
-        data = []
-
-        for _ in range(0, self.width // 2 * self.height):
-            data.append(0x33)
+        data = [0x33 for _ in range(0, self.width // 2 * self.height)]
         epdconfig.SPI.writebytes2(data)
         self.send_command(DISPLAY_REFRESH)
         self.wait_until_idle()
