@@ -174,21 +174,15 @@ class EPD:
                     # Set the bits for the column of pixels at the current position.
                     if pixels[x, y] < 64:           # black
                         buf[(x + y * self.width) // 4] &= ~(0xC0 >> (x % 4 * 2))
-                    elif pixels[x, y] < 192:     # convert gray to red
-                        buf[(x + y * self.width) // 4] &= ~(0xC0 >> (x % 4 * 2))
-                        buf[(x + y * self.width) // 4] |= 0x40 >> (x % 4 * 2)
                     else:                           # white
                         buf[(x + y * self.width) // 4] |= 0xC0 >> (x % 4 * 2)
         elif(imwidth == self.height and imheight == self.width):
             for y in range(imheight):
                 for x in range(imwidth):
                     newx = y
-                    newy = self.height - x - 1                    
+                    newy = self.height - x - 1
                     if pixels[x, y] < 64:           # black
                         buf[(newx + newy*self.width) // 4] &= ~(0xC0 >> (y % 4 * 2))
-                    elif pixels[x, y] < 192:     # convert gray to red
-                        buf[(newx + newy*self.width) // 4] &= ~(0xC0 >> (y % 4 * 2))
-                        buf[(newx + newy*self.width) // 4] |= 0x40 >> (y % 4 * 2)
                     else:                           # white
                         buf[(newx + newy*self.width) // 4] |= 0xC0 >> (y % 4 * 2)
         return buf    
