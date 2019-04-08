@@ -31,7 +31,7 @@ weather_font_big = ImageFont.truetype("./weathericons-regular-webfont.ttf", 36)
 epd = epd7in5.EPD()
 epd.init()
 print("Clear...")
-epd.Clear(0xFF)
+epd.Clear()
 
 Himage = Image.new('1', (epd7in5.EPD_WIDTH, epd7in5.EPD_HEIGHT), 255)  # 255: clear the frame    
 draw = ImageDraw.Draw(Himage)
