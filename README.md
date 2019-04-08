@@ -9,10 +9,14 @@ further drawing and setup 30 seconds.
 # Dependencies
 
 * python3
+* python3-pillow
+* python3-rpi.gpio
+
+For the display functionality:
+
+* fonts-roboto
 * python3-requests
 * python3-feedparser
-* python3-rpi.gpio
-* fonts-roboto
 
 SPI has to be enabled on the Raspberry Pi, follows the
 [steps](https://www.raspberrypi.org/documentation/hardware/raspberrypi/spi/README.md)
