@@ -30,8 +30,6 @@ weather_font_big = ImageFont.truetype("./weathericons-regular-webfont.ttf", 36)
 
 epd = epd7in5.EPD()
 epd.init()
-print("Clear...")
-epd.Clear()
 
 Himage = Image.new('1', (epd7in5.EPD_WIDTH, epd7in5.EPD_HEIGHT), 255)  # 255: clear the frame    
 draw = ImageDraw.Draw(Himage)
@@ -104,8 +102,14 @@ for index, entry in enumerate(news_data['items']):
     draw.text((0, i), "- " + entry['title'], font=font_small, fill=0)
     i += 20
 
+buf = epd.getbuffer(Himage)
+
+print("Clear...")
+print(time.ctime())
+epd.Clear()
 print('display the frame')
-epd.display(epd.getbuffer(Himage))
+epd.display(buf)
+print(time.ctime())
 time.sleep(2)
-    
+
 epd.sleep()
