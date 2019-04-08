@@ -106,11 +106,11 @@ class EPD:
     # Hardware reset
     def reset(self):
         epdconfig.digital_write(self.reset_pin, GPIO.HIGH)
-        epdconfig.delay_ms(200) 
+        epdconfig.delay_ms(200)
         epdconfig.digital_write(self.reset_pin, GPIO.LOW)         # module reset
         epdconfig.delay_ms(200)
         epdconfig.digital_write(self.reset_pin, GPIO.HIGH)
-        epdconfig.delay_ms(200)   
+        epdconfig.delay_ms(200)
 
     def send_command(self, command):
         epdconfig.digital_write(self.dc_pin, GPIO.LOW)
@@ -129,7 +129,7 @@ class EPD:
             return -1
         # EPD hardware init start
         self.reset()
-        
+
         self.send_command(POWER_SETTING)
         self.send_data(0x37)
         self.send_data(0x00)
@@ -159,7 +159,7 @@ class EPD:
         self.send_data(0x1E)      #decide by LUT file
         self.send_command(0xe5)           #FLASH MODE
         self.send_data(0x03)
-        
+
         # EPD hardware init end
         return 0
 
@@ -193,7 +193,7 @@ class EPD:
                     else:                           # white
                         buf[(newx + newy*self.width) // 4] |= 0xC0 >> (y % 4 * 2)
         return buf    
-        
+
     def display(self, image):
         self.send_command(DATA_START_TRANSMISSION_1)
         for i in range(0, self.width // 4 * self.height):
