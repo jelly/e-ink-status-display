@@ -22,6 +22,7 @@ BUIENRADAR_ICONS = {
     "w": "\uf01b",
     "pp": "\uf041",
     "bb": "\uf083",
+    "cc": "\uf031"
 }
 
 WIND_SCALE = {
