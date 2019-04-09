@@ -102,7 +102,7 @@ class EPD:
         self.busy_pin = epdconfig.BUSY_PIN
         self.width = EPD_WIDTH
         self.height = EPD_HEIGHT
-    
+
     # Hardware reset
     def reset(self):
         epdconfig.digital_write(self.reset_pin, GPIO.HIGH)
@@ -163,7 +163,7 @@ class EPD:
         # EPD hardware init end
         return 0
 
-    def getbuffer(self, image):
+    def getbuffer_old(self, image):
         buf = [0x00] * (self.width * self.height // 4)
         image_monocolor = image.convert('1')
         imwidth, imheight = image_monocolor.size
@@ -185,9 +185,39 @@ class EPD:
                         buf[(newx + newy*self.width) // 4] &= ~(0xC0 >> (y % 4 * 2))
                     else:                           # white
                         buf[(newx + newy*self.width) // 4] |= 0xC0 >> (y % 4 * 2)
-        return buf    
+        return buf
 
-    def display(self, image):
+    def getbuffer(self, image):
+        buf = [0x00] * (self.width // 2 * self.height)
+        image_monocolor = image.convert('1')
+        imwidth, imheight = image_monocolor.size
+        pixels = image_monocolor.load()
+
+        if imwidth == self.width and imheight == self.height:
+            for y in range(imheight):
+                for x in range(0, imwidth, 2):
+                    # Set the bits for the column of pixels at the current position
+                    if pixels[x, y] < 64: # black
+                        temp1 = 0x00
+                    else: # white
+                        temp1 = 0x30
+                    if pixels[x+1, y] < 64: # black
+                        temp2 = 0x00
+                    else: # white
+                        temp2 = 0x30
+                    buf[x//2 + y * self.width//2] = temp1 | (temp2>>4)
+        return buf
+
+    def display(self, data):
+        self.send_command(DATA_START_TRANSMISSION_1)
+        epdconfig.digital_write(self.dc_pin, GPIO.HIGH)
+
+        epdconfig.SPI.writebytes2(data)
+        self.send_command(DISPLAY_REFRESH)
+        epdconfig.delay_ms(100)
+        self.wait_until_idle()
+
+    def display_old(self, image):
         self.send_command(DATA_START_TRANSMISSION_1)
         epdconfig.digital_write(self.dc_pin, GPIO.HIGH)
         data = []
