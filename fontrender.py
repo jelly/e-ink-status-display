@@ -54,7 +54,7 @@ draw.text((70, i+4), sunrise, font=font, fill=0)
 
 now = datetime.now()
 timestr = time_str(now.hour, now.minute)
-draw.text((280, i), timestr, font=font_big, fill=0)
+draw.text((240, i), timestr, font=font_big, fill=0)
 
 i += 40
 
