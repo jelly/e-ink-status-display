@@ -75,7 +75,7 @@ draw.line((0, i, 140, i), fill=0)
 
 draw.text((300, old_i), "OV vertrektijden", font=font)
 old_i += 25
-draw.line((300, old_i, 400, old_i), fill=0)
+draw.line((300, old_i, 455, old_i), fill=0)
 
 # OV info
 for d in get_departures():
