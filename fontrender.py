@@ -68,11 +68,11 @@ draw.text((60, i), current_temp, font=font_big, fill=0)
 draw.text((110, i), "\uf03c", font=weather_font_big, fill=0)
 
 
-i += 50
+i += 45
 
-draw.text((0, i), "----------------------", font=font, fill=0)
+draw.line((0, i, 140, i), fill=0)
 
-i += 20
+i += 10
 
 for index, day in enumerate(days):
     # Skip today
@@ -94,12 +94,12 @@ for index, day in enumerate(days):
 
 i += 10
 draw.text((0, i), "Nieuws", font=font)
+i += 25
+draw.line((0, i, 70, i), fill=0)
 i += 10
-draw.text((0, i), "--------", font=font)
-i += 30
 news_data = feedparser.parse(NEWS_FEED)
 for index, entry in enumerate(news_data['items']):
-    if index == 5:
+    if index == 6:
         break
 
     draw.text((0, i), "- " + entry['title'], font=font_small, fill=0)
