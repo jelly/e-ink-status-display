@@ -12,53 +12,35 @@ hour_table = {
         10: 'tien',
         11: 'elf',
         12: 'twaalf',
-        13: 'een',
-        14: 'twee',
-        15: 'drie',
-        16: 'vier',
-        17: 'vijf',
-        18: 'zes',
-        19: 'zeven',
-        20: 'acht',
-        21: 'negen',
-        22: 'tien',
-        23: 'elf',
-        24: 'twaalf',
 }
 
 def time_str(hours, minutes):
+    hours = hours % 12
     formatstr = 'Het is {}'
 
-    if minutes < 20:
-        hour = hour_table[hours]
-    elif hours < 24:
-        hour = hour_table[hours+1]
-    else:
-        hour = hour_table[1]
-
     if 0 < minutes < 3:
-        return formatstr.format(hour + ' uur')
+        return formatstr.format(hour_table[hours] + ' uur')
     if 2 < minutes < 8:
-        return formatstr.format('vijf over ' + hour)
+        return formatstr.format('vijf over ' + hour_table[hours])
     if 7 < minutes < 13:
-        return formatstr.format('tien over ' + hour)
+        return formatstr.format('tien over ' + hour_table[hours])
     if 12 < minutes < 18:
-        return formatstr.format('kwart over ' + hour)
+        return formatstr.format('kwart over ' + hour_table[hours])
     if 17 < minutes < 23:
-        return formatstr.format('tien voor half ' + hour)
+        return formatstr.format('tien voor half ' + hour_table[hours+1])
     if 22 < minutes < 28:
-        return formatstr.format('vijf voor half ' + hour)
+        return formatstr.format('vijf voor half ' + hour_table[hours+1])
     if 27 < minutes < 33:
-        return formatstr.format('half ' + hour)
+        return formatstr.format('half ' + hour_table[hours+1])
     if 32 < minutes < 38:
-        return formatstr.format('vijf over half ' + hour)
+        return formatstr.format('vijf over half ' + hour_table[hours+1])
     if 37 < minutes < 43:
-        return formatstr.format('tien over half ' + hour)
+        return formatstr.format('tien over half ' + hour_table[hours+1])
     if 42 < minutes < 48:
-        return formatstr.format('kwart voor ' + hour)
+        return formatstr.format('kwart voor ' + hour_table[hours+1])
     if 47 < minutes < 53:
-        return formatstr.format('tien voor ' + hour)
+        return formatstr.format('tien voor ' + hour_table[hours+1])
     if 52 < minutes < 58:
-        return formatstr.format('vijf voor ' + hour)
+        return formatstr.format('vijf voor ' + hour_table[hours+1])
     if 57 < minutes < 60:
-        return formatstr.format(hour + ' uur')
+        return formatstr.format(hour_table[hours+1] + ' uur')
