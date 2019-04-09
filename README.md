@@ -22,6 +22,8 @@ SPI has to be enabled on the Raspberry Pi, follows the
 [steps](https://www.raspberrypi.org/documentation/hardware/raspberrypi/spi/README.md)
 on the raspberrypi.org website.
 
+Vendored font in the repo is [weather-icons](https://erikflowers.github.io/weather-icons/).
+
 # Running
 
 This depends on a newer spi-dev then is available in Debian, to compile and run follow the following steps:
