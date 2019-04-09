@@ -32,7 +32,7 @@ weather_font_big = ImageFont.truetype("./weathericons-regular-webfont.ttf", 36)
 epd = epd7in5.EPD()
 epd.init()
 
-Himage = Image.new('1', (epd7in5.EPD_WIDTH, epd7in5.EPD_HEIGHT), 255)  # 255: clear the frame    
+Himage = Image.new('1', (epd7in5.EPD_WIDTH, epd7in5.EPD_HEIGHT), 255)  # 255: clear the frame
 draw = ImageDraw.Draw(Himage)
 
 url = 'https://forecast.buienradar.nl/2.0/forecast/{}'.format(WEATHER_CODE)
@@ -107,12 +107,8 @@ for index, entry in enumerate(news_data['items']):
 
 buf = epd.getbuffer(Himage)
 
-print("Clear...")
-print(time.ctime())
 epd.Clear()
-print('display the frame')
 epd.display(buf)
-print(time.ctime())
 time.sleep(2)
 
 epd.sleep()
