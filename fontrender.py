@@ -8,6 +8,7 @@ import feedparser
 import epd7in5
 from defs import (BUIENRADAR_ICONS, WIND_SCALE)
 from wordclock import time_str
+from ovinfo import get_departures
 
 import time
 
@@ -57,6 +58,7 @@ timestr = time_str(now.hour, now.minute)
 draw.text((240, i), timestr, font=font_big, fill=0)
 
 i += 40
+old_i = i + 23
 
 current_hour = days[0]['hours'][0]
 iconcode = BUIENRADAR_ICONS.get(current_hour['iconcode'])
@@ -67,10 +69,18 @@ draw.text((0, i), iconcode, font=weather_font_big, fill=0)
 draw.text((60, i), current_temp, font=font_big, fill=0)
 draw.text((110, i), "\uf03c", font=weather_font_big, fill=0)
 
-
 i += 45
 
 draw.line((0, i, 140, i), fill=0)
+
+draw.text((300, old_i), "OV vertrektijden", font=font)
+old_i += 25
+draw.line((300, old_i, 400, old_i), fill=0)
+
+# OV info
+for d in get_departures():
+    draw.text((300, old_i), d, font=font)
+    old_i += 20
 
 i += 10
 
@@ -89,7 +99,7 @@ for index, day in enumerate(days):
     draw.text((0, i), daytxt, font=font)
     draw.text((50, i), iconcode, font=weather_font, fill=0)
     draw.text((90, i), "{}  {}".format(maxtemp, mintemp), font=font)
-    i += 30
+    i += 20
 
 
 i += 10
