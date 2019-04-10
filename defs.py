@@ -20,9 +20,16 @@ BUIENRADAR_ICONS = {
     "u": "\uf01b",
     "v": "\uf01b",
     "w": "\uf01b",
-    "pp": "\uf041",
+    "aa": "\uf02e",
     "bb": "\uf083",
-    "cc": "\uf031"
+    "cc": "\uf031",
+    "dd": "\uf023",
+    "ff": "\uf039",
+    "gg": "\uf02c",
+    "hh": "\uf032",
+    "jj": "\uf031",
+    "kk": "\uf039",
+    "pp": "\uf041",
 }
 
 WIND_SCALE = {
