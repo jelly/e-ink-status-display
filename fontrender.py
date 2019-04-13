@@ -12,23 +12,15 @@ from defs import (BUIENRADAR_ICONS, WIND_SCALE)
 from wordclock import time_str
 from ovinfo import get_departures
 
-
-WHITE = 0xFF
-BLACK = 0x00
-FONT_SIZE = 24
 WEATHER_CODE = 2757345
-WEATHER_STATION = 6344
 DATE_FORMAT = '%Y-%m-%dT%H:%M:%S'
 NEWS_FEED = 'http://feeds.nos.nl/nosnieuwsalgemeen'
 
-#configuration
-back_ground_color = (255, 255, 255)
-font_size = 24
 
 font_small = ImageFont.truetype('Roboto-Bold.ttf', 16)
 font = ImageFont.truetype('Roboto-Bold.ttf', 20)
 font_big = ImageFont.truetype('Roboto-Bold.ttf', 36)
-weather_font = ImageFont.truetype("./weathericons-regular-webfont.ttf", FONT_SIZE)
+weather_font = ImageFont.truetype("./weathericons-regular-webfont.ttf", 24)
 weather_font_big = ImageFont.truetype("./weathericons-regular-webfont.ttf", 36)
 
 epd = epd7in5.EPD()
