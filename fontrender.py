@@ -1,16 +1,17 @@
-import requests
+import time
 
 from datetime import datetime
 
-from PIL import Image, ImageDraw, ImageFont, ImageFilter
+import requests
 import feedparser
+
+from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 import epd7in5
 from defs import (BUIENRADAR_ICONS, WIND_SCALE)
 from wordclock import time_str
 from ovinfo import get_departures
 
-import time
 
 WHITE = 0xFF
 BLACK = 0x00
