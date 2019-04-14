@@ -5,7 +5,7 @@ from datetime import datetime
 import requests
 import feedparser
 
-from PIL import Image, ImageDraw, ImageFont, ImageFilter
+from PIL import Image, ImageDraw, ImageFont
 
 from driver import epd7in5
 from defs import (BUIENRADAR_ICONS, WIND_SCALE)
