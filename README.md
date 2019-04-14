@@ -61,4 +61,5 @@ PYTHONPATH=/home/pi/py-spidev/lib/ python3 bench.py
 
 # Case
 
+The Raspberry Pi Zero W and E-ink panel where integrated in an Ikea RIBBA frame of 13x18 cm.
 ![e-ink ribba ikea](https://pbs.twimg.com/media/D3gJUvkXkAUaTWx.jpg)
