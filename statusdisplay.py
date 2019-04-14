@@ -119,10 +119,10 @@ for index, entry in enumerate(news_data['items']):
     draw.text((0, i), "- " + entry['title'], font=font_small, fill=0)
     i += 20
 
-buf = epd.getbuffer(Himage)
 
+# Get buffer, clear and render display
+buf = epd.getbuffer(Himage)
 epd.clear()
 epd.display(buf)
 time.sleep(2)
-
 epd.sleep()
