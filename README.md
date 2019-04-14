@@ -22,6 +22,19 @@ on the raspberrypi.org website.
 
 Vendored font in the repo is [weather-icons](https://erikflowers.github.io/weather-icons/).
 
+# Configuration
+
+Copy the sample `statusdisplay.cfg.in` to `statusdisplay.cfg` and configure the options. 
+
+## Weather
+
+The buienradar.nl API is used for obtaining the current weather and forecast.
+The configuration file requires weather code which can be obtained by browsing
+to [buienradar](https://www.buienradar.nl). Open your browsers development
+tools and select the network panel, select your city and look for the
+`https://api.buienradar.nl/data/forecast/1.1/all/2757345/` request where
+`2757345` is the code required in the configuration file.
+
 # Running
 
 This depends on a newer spi-dev then is available in Debian, to compile and run follow the following steps:
