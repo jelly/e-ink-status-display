@@ -7,7 +7,7 @@ import feedparser
 
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
-import epd7in5
+from driver import epd7in5
 from defs import (BUIENRADAR_ICONS, WIND_SCALE)
 from wordclock import time_str
 from ovinfo import get_departures

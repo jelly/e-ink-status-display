@@ -1,7 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 import time
-import epd7in5
+from driver import epd7in5
 
 font = ImageFont.truetype('Roboto-Bold.ttf', 20)
 Himage = Image.new('1', (epd7in5.EPD_WIDTH, epd7in5.EPD_HEIGHT), 255)  # 255: clear the frame    
@@ -13,8 +13,8 @@ buf = epd.getbuffer(Himage)
 
 print(time.ctime())
 epd.init()
-print("Clear...")
-epd.Clear()
+print("clear...")
+epd.clear()
 
 epd.display(buf)
 print(time.ctime())
