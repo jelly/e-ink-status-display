@@ -1,0 +1,8 @@
+[weather]
+code = 2757345
+
+[news]
+feed = http://feeds.nos.nl/nosnieuwsalgemeen
+
+[ov]
+id = leidschendam/tramhalte-metrostation-leidschendam-voorburg

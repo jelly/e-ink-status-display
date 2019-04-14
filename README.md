@@ -35,6 +35,18 @@ tools and select the network panel, select your city and look for the
 `https://api.buienradar.nl/data/forecast/1.1/all/2757345/` request where
 `2757345` is the code required in the configuration file.
 
+## News
+
+The default news RSS feed is [nos.nl](https://nos.nl), in theory any other
+newsfeed can be used since only the title is used to display the news items.
+
+## Public Transport
+
+9292ov's API is used to display departure times from a configured stop, the
+stop id can figured out by querying the 9292ov api with a search string for
+example "Delft". Request
+`http://api.9292.nl/0.1/locations?lang=nl-NL&type=stop&q=Delft` and select for
+example `delft/bus-tramhalte-station-delft` as id in `statusdisplay.cfg`.
 # Running
 
 This depends on a newer spi-dev then is available in Debian, to compile and run follow the following steps:

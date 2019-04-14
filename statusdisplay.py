@@ -1,9 +1,11 @@
+import configparser
 import time
 
 from datetime import datetime
 
 import requests
 import feedparser
+
 
 from PIL import Image, ImageDraw, ImageFont
 
@@ -12,9 +14,10 @@ from defs import (BUIENRADAR_ICONS, WIND_SCALE)
 from wordclock import time_str
 from ovinfo import get_departures
 
-WEATHER_CODE = 2757345
 DATE_FORMAT = '%Y-%m-%dT%H:%M:%S'
-NEWS_FEED = 'http://feeds.nos.nl/nosnieuwsalgemeen'
+
+config = configparser.ConfigParser()
+config.read('statusdisplay.cfg')
 
 
 font_small = ImageFont.truetype('Roboto-Bold.ttf', 16)
@@ -29,7 +32,7 @@ epd.init()
 Himage = Image.new('1', (epd7in5.EPD_WIDTH, epd7in5.EPD_HEIGHT), 255)  # 255: clear the frame
 draw = ImageDraw.Draw(Himage)
 
-url = 'https://forecast.buienradar.nl/2.0/forecast/{}'.format(WEATHER_CODE)
+url = 'https://forecast.buienradar.nl/2.0/forecast/{}'.format(config.get('weather', 'code'))
 r = requests.get(url)
 
 future_data = r.json()
@@ -71,7 +74,7 @@ old_i += 25
 draw.line((300, old_i, 455, old_i), fill=0)
 
 # OV info
-for d in get_departures():
+for d in get_departures(config.get('ov', 'id')):
     draw.text((300, old_i), d, font=font)
     old_i += 20
 
@@ -100,7 +103,7 @@ draw.text((0, i), "Nieuws", font=font)
 i += 25
 draw.line((0, i, 70, i), fill=0)
 i += 10
-news_data = feedparser.parse(NEWS_FEED)
+news_data = feedparser.parse(config.get('news', 'url'))
 for index, entry in enumerate(news_data['items']):
     if index == 6:
         break
