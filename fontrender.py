@@ -110,7 +110,7 @@ for index, entry in enumerate(news_data['items']):
 
 buf = epd.getbuffer(Himage)
 
-epd.Clear()
+epd.clear()
 epd.display(buf)
 time.sleep(2)
 
