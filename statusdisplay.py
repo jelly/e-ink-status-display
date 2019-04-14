@@ -37,15 +37,24 @@ days = get_weather(config.get('weather', 'code'))
 
 i = 0
 today = days[0]
-wind = WIND_SCALE.get(today['windspeed'])
-sunrise = datetime.strptime(today['sunset'], DATE_FORMAT).strftime('%H:%M')
-
-# Wind / sunset / 
-draw.text((0, i), wind, font=weather_font, fill=0)
-draw.text((35, i), "\uf052", font=weather_font, fill=0)
-draw.text((70, i+4), sunrise, font=font, fill=0)
 
 now = datetime.now()
+wind = WIND_SCALE.get(today['windspeed'])
+sunrise = datetime.strptime(today['sunrise'], DATE_FORMAT)
+sunset = datetime.strptime(today['sunset'], DATE_FORMAT)
+if sunrise < now < sunset:
+    sunicon = "\uf052"
+    suntime = sunset
+else:
+    suntime = sunrise
+    sunicon = "\uf051"
+
+
+# Wind / sunset / Sunrise/Sundown.
+draw.text((0, i), wind, font=weather_font, fill=0)
+draw.text((35, i), sunicon, font=weather_font, fill=0)
+draw.text((70, i+4), suntime.strftime('%H:%M'), font=font, fill=0)
+
 timestr = time_str(now.hour, now.minute)
 draw.text((240, i), timestr, font=font_big, fill=0)
 
