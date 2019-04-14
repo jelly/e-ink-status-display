@@ -50,9 +50,8 @@ timestr = time_str(now.hour, now.minute)
 time_length = draw.textsize(timestr, font_big)[0] + 5
 draw.text((epd7in5.EPD_WIDTH-time_length, i), timestr, font=font_big, fill=0)
 
-i += 40
-old_i = i + 23
-
+i += 35
+old_i = i + 18
 
 # Current temp
 iconcode, current_temp = weather.currenttemp()
