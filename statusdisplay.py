@@ -50,11 +50,11 @@ else:
     sunicon = "\uf051"
 
 
-# Wind / sunset / Sunrise/Sundown.
+# Wind, sunset/sunrise.
 draw.text((0, i), winddirection, font=weather_font, fill=0)
 draw.text((25, i), wind, font=weather_font, fill=0)
 draw.text((60, i), sunicon, font=weather_font, fill=0)
-draw.text((90, i+4), suntime.strftime('%H:%M'), font=font, fill=0)
+draw.text((95, i+4), suntime.strftime('%H:%M'), font=font, fill=0)
 
 timestr = time_str(now.hour, now.minute)
 # Calculate text width and add margin
@@ -86,7 +86,7 @@ for d in get_departures(config.get('ov', 'id')):
     draw.text((300, old_i), d, font=font)
     old_i += 20
 
-i += 10
+i += 6
 
 for index, day in enumerate(days):
     # Skip today
@@ -103,17 +103,17 @@ for index, day in enumerate(days):
     draw.text((0, i), daytxt, font=font)
     draw.text((50, i), iconcode, font=weather_font, fill=0)
     draw.text((90, i), "{}  {}".format(maxtemp, mintemp), font=font)
-    i += 20
+    i += 25
 
 
-i += 10
+i += 60
 draw.text((0, i), "Nieuws", font=font)
 i += 25
 draw.line((0, i, 70, i), fill=0)
-i += 10
+i += 2
 news_data = feedparser.parse(config.get('news', 'url'))
 for index, entry in enumerate(news_data['items']):
-    if index == 6:
+    if index == 5:
         break
 
     draw.text((0, i), "- " + entry['title'], font=font_small, fill=0)
