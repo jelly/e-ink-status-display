@@ -12,9 +12,7 @@ from driver import epd7in5
 # Data sources
 from datasources.wordclock import time_str
 from datasources.ovinfo import get_departures
-from datasources.weather import (get_weather, BUIENRADAR_ICONS, WIND_SCALE, WIND_DIRECTION)
-
-DATE_FORMAT = '%Y-%m-%dT%H:%M:%S'
+from datasources.weather import (get_weather, BUIENRADAR_ICONS, WIND_SCALE, WIND_DIRECTION, WeatherData)
 
 config = configparser.ConfigParser()
 config.read('statusdisplay.cfg')
@@ -37,25 +35,16 @@ days = get_weather(config.get('weather', 'code'))
 i = 0
 today = days[0]
 
-now = datetime.now()
-wind = WIND_SCALE.get(today['windspeed'])
-winddirection = WIND_DIRECTION.get(today['winddirection'])
-sunrise = datetime.strptime(today['sunrise'], DATE_FORMAT)
-sunset = datetime.strptime(today['sunset'], DATE_FORMAT)
-if sunrise < now < sunset:
-    sunicon = "\uf052"
-    suntime = sunset
-else:
-    suntime = sunrise
-    sunicon = "\uf051"
-
+weather = WeatherData(config.get('weather', 'code'))
 
 # Wind, sunset/sunrise.
-draw.text((0, i), winddirection, font=weather_font, fill=0)
-draw.text((25, i), wind, font=weather_font, fill=0)
+sunicon, suntime = weather.sundata()
+draw.text((0, i), weather.winddirection(), font=weather_font, fill=0)
+draw.text((25, i), weather.windspeed(), font=weather_font, fill=0)
 draw.text((60, i), sunicon, font=weather_font, fill=0)
 draw.text((95, i+4), suntime.strftime('%H:%M'), font=font, fill=0)
 
+now = datetime.now()
 timestr = time_str(now.hour, now.minute)
 # Calculate text width and add margin
 time_length = draw.textsize(timestr, font_big)[0] + 5
@@ -64,11 +53,9 @@ draw.text((epd7in5.EPD_WIDTH-time_length, i), timestr, font=font_big, fill=0)
 i += 40
 old_i = i + 23
 
-current_hour = days[0]['hours'][0]
-iconcode = BUIENRADAR_ICONS.get(current_hour['iconcode'])
-current_temp = str(round(current_hour['temperature']))
 
 # Current temp
+iconcode, current_temp = weather.currenttemp()
 draw.text((0, i), iconcode, font=weather_font_big, fill=0)
 draw.text((60, i), current_temp, font=font_big, fill=0)
 draw.text((110, i), "\uf03c", font=weather_font_big, fill=0)
@@ -88,21 +75,10 @@ for d in get_departures(config.get('ov', 'id')):
 
 i += 6
 
-for index, day in enumerate(days):
-    # Skip today
-    if index == 0:
-        continue
-
-    # Show 4 future days.
-    if index == 5:
-        break
-    maxtemp = day['maxtemp']
-    mintemp = day['mintemp']
-    daytxt = datetime.strptime(day['datetime'], '%Y-%m-%dT%H:%M:%S').strftime('%a')
-    iconcode = BUIENRADAR_ICONS.get(day['iconcode'])
-    draw.text((0, i), daytxt, font=font)
-    draw.text((50, i), iconcode, font=weather_font, fill=0)
-    draw.text((90, i), "{}  {}".format(maxtemp, mintemp), font=font)
+for day in weather.forecast():
+    draw.text((0, i), day['txt'], font=font)
+    draw.text((50, i), day['icon'], font=weather_font, fill=0)
+    draw.text((90, i), day['temp'], font=font)
     i += 25
 
 

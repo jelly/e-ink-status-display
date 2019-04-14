@@ -1,7 +1,8 @@
+from datetime import datetime
 import requests
 
 URL = 'https://forecast.buienradar.nl/2.0/forecast/{}'
-
+DATE_FORMAT = '%Y-%m-%dT%H:%M:%S'
 
 BUIENRADAR_ICONS = {
     "a": "\uf00d",
@@ -70,3 +71,51 @@ def get_weather(code):
     r = requests.get(URL.format(code))
     future_data = r.json()
     return future_data['days']
+
+
+class WeatherData():
+    def __init__(self, code):
+        r = requests.get(URL.format(code))
+        self.days = r.json()['days']
+        self.today = self.days[0]
+
+    def windspeed(self):
+        return WIND_SCALE.get(self.today['windspeed'])
+
+    def winddirection(self):
+        return WIND_DIRECTION.get(self.today['winddirection'])
+
+    def sundata(self):
+        now = datetime.now()
+        sunrise = datetime.strptime(self.today['sunrise'], DATE_FORMAT)
+        sunset = datetime.strptime(self.today['sunset'], DATE_FORMAT)
+        if sunrise < now < sunset:
+            sunicon = "\uf052"
+            suntime = sunset
+        else:
+            suntime = sunrise
+            sunicon = "\uf051"
+        return sunicon, suntime
+
+    def currenttemp(self):
+        current_hour = self.today['hours'][0]
+        iconcode = BUIENRADAR_ICONS.get(current_hour['iconcode'])
+        current_temp = str(round(current_hour['temperature']))
+        return iconcode, current_temp
+
+    def forecast(self, days=4):
+        data = []
+        for index, day in enumerate(self.days):
+            # Skip today
+            if index == 0:
+                continue
+
+            if index == days+1:
+                break
+
+            data.append({
+                'temp': '{} {}'.format(day['maxtemp'], day['mintemp']),
+                'icon': BUIENRADAR_ICONS.get(day['iconcode']),
+                'txt': datetime.strptime(day['datetime'], '%Y-%m-%dT%H:%M:%S').strftime('%a')
+            })
+        return data
