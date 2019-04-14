@@ -12,7 +12,7 @@ from driver import epd7in5
 # Data sources
 from datasources.wordclock import time_str
 from datasources.ovinfo import get_departures
-from datasources.weather import (get_weather, BUIENRADAR_ICONS, WIND_SCALE)
+from datasources.weather import (get_weather, BUIENRADAR_ICONS, WIND_SCALE, WIND_DIRECTION)
 
 DATE_FORMAT = '%Y-%m-%dT%H:%M:%S'
 
@@ -39,6 +39,7 @@ today = days[0]
 
 now = datetime.now()
 wind = WIND_SCALE.get(today['windspeed'])
+winddirection = WIND_DIRECTION.get(today['winddirection'])
 sunrise = datetime.strptime(today['sunrise'], DATE_FORMAT)
 sunset = datetime.strptime(today['sunset'], DATE_FORMAT)
 if sunrise < now < sunset:
@@ -50,12 +51,15 @@ else:
 
 
 # Wind / sunset / Sunrise/Sundown.
-draw.text((0, i), wind, font=weather_font, fill=0)
-draw.text((35, i), sunicon, font=weather_font, fill=0)
-draw.text((70, i+4), suntime.strftime('%H:%M'), font=font, fill=0)
+draw.text((0, i), winddirection, font=weather_font, fill=0)
+draw.text((25, i), wind, font=weather_font, fill=0)
+draw.text((60, i), sunicon, font=weather_font, fill=0)
+draw.text((90, i+4), suntime.strftime('%H:%M'), font=font, fill=0)
 
 timestr = time_str(now.hour, now.minute)
-draw.text((240, i), timestr, font=font_big, fill=0)
+# Calculate text width and add margin
+time_length = draw.textsize(timestr, font_big)[0] + 5
+draw.text((epd7in5.EPD_WIDTH-time_length, i), timestr, font=font_big, fill=0)
 
 i += 40
 old_i = i + 23

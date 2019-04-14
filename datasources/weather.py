@@ -61,7 +61,7 @@ WIND_DIRECTION = {
     "NO": "\uf05a",
     "Z": "\uf060",
     "ZW": "\uf05e",
-    "ZO": "\uf05d",
+    "ZO": "\uf05D",
     "O": "\uf059",
     "W": "\uf061",
 }
