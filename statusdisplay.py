@@ -11,8 +11,9 @@ from PIL import Image, ImageDraw, ImageFont
 
 from driver import epd7in5
 from defs import (BUIENRADAR_ICONS, WIND_SCALE)
-from wordclock import time_str
-from ovinfo import get_departures
+from datasources.wordclock import time_str
+from datasources.ovinfo import get_departures
+from datasources.weather import get_weather
 
 DATE_FORMAT = '%Y-%m-%dT%H:%M:%S'
 
@@ -32,12 +33,7 @@ epd.init()
 Himage = Image.new('1', (epd7in5.EPD_WIDTH, epd7in5.EPD_HEIGHT), 255)  # 255: clear the frame
 draw = ImageDraw.Draw(Himage)
 
-url = 'https://forecast.buienradar.nl/2.0/forecast/{}'.format(config.get('weather', 'code'))
-r = requests.get(url)
-
-future_data = r.json()
-days = future_data['days']
-
+days = get_weather(config.get('weather', 'code'))
 
 i = 0
 today = days[0]
