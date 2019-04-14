@@ -3,9 +3,7 @@ import time
 
 from datetime import datetime
 
-import requests
 import feedparser
-
 
 from PIL import Image, ImageDraw, ImageFont
 
