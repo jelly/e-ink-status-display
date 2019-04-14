@@ -10,10 +10,11 @@ import feedparser
 from PIL import Image, ImageDraw, ImageFont
 
 from driver import epd7in5
-from defs import (BUIENRADAR_ICONS, WIND_SCALE)
+
+# Data sources
 from datasources.wordclock import time_str
 from datasources.ovinfo import get_departures
-from datasources.weather import get_weather
+from datasources.weather import (get_weather, BUIENRADAR_ICONS, WIND_SCALE)
 
 DATE_FORMAT = '%Y-%m-%dT%H:%M:%S'
 
