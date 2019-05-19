@@ -1,3 +1,3 @@
 [submodule "driver"]
 	path = driver
-	url = git@github.com:jelly/waveshare-7.5inch-driver.git
+	url = https://github.com/jelly/waveshare-7.5inch-driver.git
