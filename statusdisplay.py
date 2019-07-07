@@ -59,6 +59,11 @@ draw.text((0, i), iconcode, font=weather_font_big, fill=0)
 draw.text((60, i), current_temp, font=font_big, fill=0)
 draw.text((110, i), "\uf03c", font=weather_font_big, fill=0)
 
+# Min/max
+mintemp, maxtemp = weather.minmax_today()
+draw.text((140, i+5), maxtemp, font=font_small, fill=0)
+draw.text((140, i+draw.textsize(maxtemp, font_small)[0]+5), mintemp  ,font=font_small, fill=0)
+
 i += 45
 
 draw.line((0, i, 140, i), fill=0)

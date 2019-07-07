@@ -103,6 +103,11 @@ class WeatherData():
         current_temp = str(round(current_hour['temperature']))
         return iconcode, current_temp
 
+    def minmax_today(self):
+        mintemp = str(round(self.today['mintemperature']))
+        maxtemp = str(round(self.today['maxtemperature']))
+        return mintemp, maxtemp
+
     def forecast(self, days=4):
         data = []
         for index, day in enumerate(self.days):
